@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->foreignId('temp_id')
-                  ->constrained('users')
-                  ->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign(['post_id']); 
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('comments', function (Blueprint $table) {
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+        });
     }
 };

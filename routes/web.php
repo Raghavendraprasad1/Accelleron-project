@@ -20,7 +20,7 @@ Route::get('/home', function () {
 });
 Route::get('/posts', [PostController::class, 'getPosts'])->name('posts.index');
 // Admin Login Routes
-Route::get('/admin/login', [AdminController::class, 'index']);
+Route::get('/', [AdminController::class, 'index']);
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
